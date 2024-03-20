@@ -32,7 +32,7 @@
               <button class="btn btn-primary account-btn" type="submit">Signup</button>
             </div>
             <div class="text-center login-link">
-              Already have an account? <router-link to="/login">Login</router-link>
+              Already have an account? <router-link to="/">Login</router-link>
             </div>
           </form>
         </div>
@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     submitForm() {
-      // Handle form submission here
+      // Handle form submission 
       console.log('Form submitted');
     }
   }

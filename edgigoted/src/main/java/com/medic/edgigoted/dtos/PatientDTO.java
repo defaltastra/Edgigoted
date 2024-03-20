@@ -39,5 +39,4 @@ public class PatientDTO {
     private String prenom;
     private String adresse;
 
-    // Getters and setters
 }

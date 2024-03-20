@@ -32,7 +32,7 @@
                       <td>{{ patient.phone }}</td>
                       <td>{{ patient.email }}</td>
                       <td class="text-right">
-                        <!-- Add actions here -->
+                       
                       </td>
                     </tr>
                   </tbody>
@@ -58,19 +58,19 @@
     },
     data() {
       return {
-        patients: [] // Array to store fetched patients
+        patients: [] 
       };
     },
     mounted() {
-      // Fetch patients data when component is mounted
+      // Fetch patients data 
       this.fetchPatients();
     },
     methods: {
       fetchPatients() {
         // Make GET request to fetch patients data
-        axios.get('http://localhost:8888/api/patients')
+        axios.get('http://localhost:8080/api/patients')
   .then(response => {
-    this.patients = response.data; // Update patients array with fetched data
+    this.patients = response.data; 
   })
   .catch(error => {
     console.error('Error fetching patients:', error);
@@ -81,7 +81,4 @@
   }
   </script>
   
-  <style scoped>
-  /* Add component-specific styles here */
-  </style>
-  
+

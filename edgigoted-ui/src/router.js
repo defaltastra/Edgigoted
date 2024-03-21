@@ -5,7 +5,7 @@ import Dashboard from './views/Dashboard.vue'
 import Register from './views/Register.vue'
 import Patients from './views/Patients.vue'
 const routes = [
-  { path: '/login', name: 'Login', component: Login },
+  { path: '/', name: 'Login', component: Login },
   { path: '/patients', name: 'Patients', component: Patients },
 
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },

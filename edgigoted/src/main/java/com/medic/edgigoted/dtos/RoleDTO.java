@@ -21,5 +21,4 @@ public class RoleDTO {
 
     private String nom;
 
-    // Getters and setters
 }

@@ -69,4 +69,28 @@ public class DoctorController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    // Endpoint for doctor sign up
+    @PostMapping("/signup")
+    public ResponseEntity<Doctor> signUp(@RequestBody Doctor doctor) {
+        // You may want to add validation logic here to ensure unique email or other requirements
+        Doctor savedDoctor = doctorRepository.save(doctor);
+        return new ResponseEntity<>(savedDoctor, HttpStatus.CREATED);
+    }
+    // Endpoint for doctor sign-in
+    @PostMapping("/signin")
+    public ResponseEntity<Doctor> signInDoctor(@RequestBody Doctor doctor) {
+        String email = doctor.getEmail();
+        String password = doctor.getPassword();
+
+        // Retrieve doctor by email
+        Doctor existingDoctor = doctorRepository.findByEmail(email);
+
+        // Retrieve doctor by email
+
+        if (existingDoctor != null && existingDoctor.getPassword().equals(password)) {
+            return new ResponseEntity<>(existingDoctor, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
 }

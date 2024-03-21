@@ -30,5 +30,5 @@ public class EquipmentDTO {
     private String nom;
     private String etat;
 
-    // Getters and setters
+
 }

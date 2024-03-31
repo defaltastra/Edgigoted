@@ -18,16 +18,9 @@ public class Doctor {
         this.name = name;
     }
 
-    public String getSpecialty() {
-        return specialty;
-    }
 
-    public void setSpecialty(String specialty) {
-        this.specialty = specialty;
-    }
 
     private String name;
-    private String specialty;
     private String email;
 
     public String getEmail() {

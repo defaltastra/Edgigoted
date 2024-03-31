@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -78,19 +77,21 @@ public class DoctorController {
     }
     // Endpoint for doctor sign-in
     @PostMapping("/signin")
-    public ResponseEntity<Doctor> signInDoctor(@RequestBody Doctor doctor) {
+    public ResponseEntity<?> signInDoctor(@RequestBody Doctor doctor) {
         String email = doctor.getEmail();
         String password = doctor.getPassword();
 
         // Retrieve doctor by email
         Doctor existingDoctor = doctorRepository.findByEmail(email);
 
-        // Retrieve doctor by email
-
+        // Check if the doctor exists and the password matches
         if (existingDoctor != null && existingDoctor.getPassword().equals(password)) {
-            return new ResponseEntity<>(existingDoctor, HttpStatus.OK);
+            // If the sign-in is successful, return the doctor object in the response body
+            return ResponseEntity.ok(existingDoctor);
         } else {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            // If the sign-in fails, return a custom error message along with HttpStatus.UNAUTHORIZED
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid email or password"); // Custom error message
         }
     }
-}
+    }

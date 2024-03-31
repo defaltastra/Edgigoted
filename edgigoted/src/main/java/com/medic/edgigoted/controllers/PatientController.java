@@ -38,15 +38,23 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
-    public Patient updatePatient(@PathVariable Long id, @RequestBody Patient patientDetails) {
+    public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientDetails) {
         Patient patient = patientRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Patient not found with id: " + id));
 
+        // Update patient details
         patient.setName(patientDetails.getName());
+        patient.setAge(patientDetails.getAge());
         patient.setAddress(patientDetails.getAddress());
+        patient.setPhone(patientDetails.getPhone());
+        patient.setEmail(patientDetails.getEmail());
 
-        return patientRepository.save(patient);
+        // Save the updated patient
+        Patient updatedPatient = patientRepository.save(patient);
+
+        return ResponseEntity.ok(updatedPatient);
     }
+
 
     @DeleteMapping("/{id}")
     public void deletePatient(@PathVariable Long id) {

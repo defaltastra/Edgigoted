@@ -14,7 +14,7 @@
               <img class="rounded-circle" src="/assets/img/user.jpg" width="24" alt="Admin">
               <span class="status online"></span>
             </span>
-            <span>Admin</span>
+            <span>{{ username }}</span>
           </a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="profile">My Profile</a>
@@ -59,35 +59,33 @@
       </div>
     </div>
     <div class="page-wrapper">
-    <div class="content">
-      <div class="row">
-        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-          <div class="dash-widget">
-            <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
-            <div class="dash-widget-info text-right">
-              <h3>{{ doctorsCount }}</h3>
-              <span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="dash-widget">
+              <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+              <div class="dash-widget-info text-right">
+                <h3>{{ doctorsCount }}</h3>
+                <span class="widget-title1">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-          <div class="dash-widget">
-            <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
-            <div class="dash-widget-info text-right">
-              <h3>{{ patientsCount }}</h3>
-              <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+          <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+            <div class="dash-widget">
+              <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+              <div class="dash-widget-info text-right">
+                <h3>{{ patientsCount }}</h3>
+                <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+              </div>
             </div>
           </div>
+          <!-- Add more widgets here as needed -->
         </div>
-        <!-- Add more widgets here as needed -->
       </div>
     </div>
+    <div class="sidebar-overlay" data-reff=""></div>
   </div>
-  </div>
-  <div class="sidebar-overlay" data-reff=""></div>
-
 </template>
-
 
 <script>
 import axios from 'axios';
@@ -95,22 +93,24 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      username: '',
       doctorsCount: 0,
       patientsCount: 0
     };
   },
   mounted() {
     this.fetchData();
+    this.username = localStorage.getItem('username');
   },
   methods: {
     async fetchData() {
       try {
         // Fetch doctors count
-        const doctorsResponse = await axios.get('http://localhost:8080/api/doctors');
+        const doctorsResponse = await axios.get('http://localhost:8888/api/doctors');
         this.doctorsCount = doctorsResponse.data.count; 
 
         // Fetch patients count
-        const patientsResponse = await axios.get('http://localhost:8080/api/patients');
+        const patientsResponse = await axios.get('http://localhost:8888/api/patients');
         this.patientsCount = patientsResponse.data.count; 
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -120,8 +120,7 @@ export default {
 };
 </script>
 
-
 <style scoped>
-  @import '/assets/css/style.css';
+@import '/assets/css/style.css';
 
 </style>

@@ -9,7 +9,7 @@
             </div>
             <div class="form-group">
               <label>Username</label>
-              <input type="text" class="form-control" v-model="username">
+              <input type="text" class="form-control" v-model="name">
             </div>
             <div class="form-group">
               <label>Email Address</label>
@@ -18,15 +18,6 @@
             <div class="form-group">
               <label>Password</label>
               <input type="password" class="form-control" v-model="password">
-            </div>
-            <div class="form-group">
-              <label>Mobile Number</label>
-              <input type="text" class="form-control" v-model="mobileNumber">
-            </div>
-            <div class="form-group checkbox">
-              <label>
-                <input type="checkbox" v-model="termsAccepted"> I have read and agree the Terms & Conditions
-              </label>
             </div>
             <div class="form-group text-center">
               <button class="btn btn-primary account-btn" type="submit">Signup</button>
@@ -42,25 +33,40 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      username: '',
+      name: '',
       email: '',
-      password: '',
-      mobileNumber: '',
-      termsAccepted: false
+      password: ''
     };
   },
   methods: {
-    submitForm() {
-      // Handle form submission 
-      console.log('Form submitted');
+    async submitForm() {
+      try {
+        // Prepare user data
+        const userData = {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        };
+
+        // Make API call to sign up the user
+        const response = await axios.post('http://localhost:8888/api/doctors/signup', userData);
+
+        // Handle success response
+        console.log('User signed up successfully:', response.data);
+      } catch (error) {
+        // Handle error
+        console.error('Error signing up user:', error);
+      }
     }
   }
 }
 </script>
 
-<style scoped >
-  @import '/assets/css/style.css';
+<style scoped>
+@import '/assets/css/style.css';
 </style>
